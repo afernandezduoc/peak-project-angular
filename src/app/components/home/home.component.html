@@ -1,1 +1,214 @@
-<p>home works!</p>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PEAK</title>
+
+    <!--HOJA DE ESTILOS
+    <link rel="stylesheet" type="text/css" href="../../../styles.css" />-->
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/icons/favicon-32x32.png" />
+
+    <!-- Animate CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
+<body>
+    <header id="header">
+        <div class="center">
+            <!-- LOGO -->
+            <div id="logo">
+                <img src="../../../assets/images/PEAK.jpg" class="app-logo" alt="Logotipo" />
+            </div>
+
+            <!-- MENU -->
+            <nav id="menu">
+                <ul>
+                    <li>
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li>
+                        <a href="#about" class="nav-link">Sobre nosotros</a>
+                    </li>
+                    <li>
+                        <a href="#services" class="nav-link">Servicios</a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="nav-link">Contactanos</a>
+                    </li>
+                    <li>
+                        <button id="btnLogin" onclick="document.getElementById('login').style.display='block'"
+                            style="width:auto; display: none;">Entrar</button>
+                        <button id="btnUser" onclick="document.getElementById('userId').style.display='block'"
+                            style="width:auto; display: none;"></button>
+                    </li>
+                </ul>
+                <!-- Login Modal in index.html -->
+<div id="login" class="modal">
+    <form class="modal-content animate" onsubmit="return login()">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('login').style.display='none'" class="close"
+                title="Close Modal">&times;</span>
+        </div>
+        <div class="container">
+            <label for="uname"><b>Usuario</b></label>
+            <input type="text" placeholder="Ingrese Usuario" name="uname" id="username" required>
+            <label for="psw"><b>Contraseña</b></label>
+            <input type="password" placeholder="Ingrese" name="psw" id="password" required>
+            <button type="submit">Entrar</button>
+        </div>
+        <div class="container" style="background-color:#f1f1f1">
+            <div><a href="register.html" style="color: var(--secondary-color);">Registrate aquí</a></div>
+            <hr>
+            <div>Olvidaste la <a href="password_recovery.html" style="color: var(--secondary-color);">contraseña?</a></div>
+        </div>
+    </form>
+</div>
+
+                <div id="userId" class="modal">
+                    <form class="modal-content animate">
+                        <div class="imgcontainer">
+                            <span onclick="document.getElementById('userId').style.display='none'" class="close"
+                                title="Close Modal">&times;</span>
+                            <img alt="Avatar" class="avatar" id="avatar">
+                        </div>
+                        <div class="container">
+                            <label id="userLogged"><b></b></label>
+                        </div>
+                        <div><a href="dashboard.html" style="color: var(--secondary-color);">Dashboard</a></div>
+                        <div><a href="report.html" style="color: var(--secondary-color);">Reportes</a></div>
+                        <div class="container">
+                            <button class="cancelbtn" onclick="logout()">Salir</button>
+                        </div>
+                    </form>
+                </div>
+                <button class="burger-menu" id="burger-menu">
+                    <!--<ion-icon class="bars" name="menu-outline"></ion-icon> -->
+                </button>
+
+            </nav>
+
+            <!--LIMPIAR FLOTADOS-->
+            <div class="clearfix"></div>
+        </div>
+    </header>
+
+
+
+    <div id="slider" class="slider-big">
+        <div>
+            <img class="slider" src="../../../assets/images/puerto-natales.jpg">
+            <!--<img class="slider" src="assets/images/rov01.png" style="width: 100%">
+                <img class="slider" src="assets/images/rov02.JPG" style="width: 100%"> -->
+            <div class="welcome">
+                <h1>Bienvenido a PEAK</h1>
+                <h2>Diving Services</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="center">
+        <section id="about">
+            <h2 class="subheader">Sobre nosotros</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquet at orci ac sagittis. Etiam rutrum
+                nisi sed tellus eleifend egestas. Integer posuere elit mattis nisl viverra, ut tempus mi porttitor.
+                Fusce posuere enim a erat scelerisque, ut convallis elit ullamcorper. Fusce feugiat metus ac elit
+                laoreet luctus. Vestibulum dignissim sem eget nulla blandit molestie. Phasellus vitae nulla et dolor
+                aliquam varius. Donec elementum vel leo vitae ultrices. Vivamus consequat ullamcorper pretium. </p>
+            <p>Nullam consequat massa massa, id fermentum libero pellentesque et. Ut scelerisque, metus vitae facilisis
+                dictum, nibh ex mollis mauris, vel scelerisque metus nunc vitae odio. Nulla at erat vitae metus
+                tristique malesuada vitae vel lorem. Donec non ante dui. Donec elit diam, blandit vitae interdum at,
+                cursus nec neque. Sed nec facilisis dui. Vivamus ut ante dictum, ultrices enim in, ultrices dolor. Nunc
+                consectetur ante nec iaculis auctor. </p>
+            <p>Donec non magna dolor. Fusce varius purus in dolor semper venenatis. Nulla aliquam turpis vel elit
+                tincidunt, et viverra lacus pellentesque. In euismod libero vel dolor consectetur, vel efficitur nisi
+                accumsan. Integer sit amet viverra magna. Ut finibus felis eget ligula consectetur dapibus. Donec
+                hendrerit, felis sed dapibus tincidunt, eros mi egestas magna, et sollicitudin ipsum elit eu sem.
+                Quisque sed dui sed nibh laoreet ornare eget iaculis odio. </p>
+        </section>
+        <div class="clearfix"></div>
+        <section id="services">
+            <h2>¿Que es lo que hacemos?</h2>
+            <ul class="b">
+                <li>Búsqueda bajo el Agua</li>
+                <li>Detección de filtraciones</li>
+                <li>Inspecciones submarinas</li>
+                <li>Inspecciones en Muelles y Puertos</li>
+                <li>Apoyo en servicios de Buceo</li>
+                <li>Modelado 3D y renderizado de estructuras submarinas</li>
+                <li>Búsqueda y recuperación de objetos perdidos en el fondo del mar</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Contact section -->
+    <section class="contact" id="contact">
+        <h2>Contactanos</h2>
+        <div class=companydata>
+            Puerto Natales, Chile<br>
+            Phone: +56 912345678<br>
+            <address>
+                <a href="mailto:info@correo.cl">Email</a><br>
+            </address>
+            <p class="w3-opacity w3-center"><i>¡También nos puedes escribir en este formulario!</i></p>
+        </div>
+        <div class="contact-form-container">
+            <div class="contact-form">
+                <form action="https://formspree.io/f/xoqygpgw" method="POST">
+                    <div class="form-control">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="sender-name" placeholder="Ingrese su Nombre"
+                            class="input-field" required />
+                    </div>
+                    <div class="form-control">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="sender-email" placeholder="Ingrese su Email"
+                            class="input-field" required />
+                    </div>
+                    <div class="form-control">
+                        <label for="phone">Teléfono</label>
+                        <input type="phone" id="phone" name="sender-phone" placeholder="Ingrese su número de teléfono"
+                            class="input-field" required />
+                    </div>
+                    <div class="form-control">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" cols="60" rows="10" placeholder="Escriba su mensaje" name="message"
+                            class="input-field" required></textarea>
+                    </div>
+                    <br />
+                    <br />
+                    <input type="submit" value="Enviar" id="submit-btn" class="submit-btn" />
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="center">
+            <p class="copy">
+                &copy; Copyright 2024
+            </p>
+            <p class="copy">
+                Desarrollado por 
+                <a href="https://www.linkedin.com/in/alejandrofernandezb/" target="_blank">Alejandro Fernández
+                    Barrientos</a>
+            </p>
+            <i class="scroll-up" id="scroll-up"><img src="assets/icons/arrow-up.png" class="socicon up-arrow"
+                    alt="scroll-up" /></i>
+        </div>
+    </footer>
+
+    <!-- Website scripts -->
+    <script src="assets/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+
+    <!-- Ion icons scripts -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
