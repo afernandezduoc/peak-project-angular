@@ -8,13 +8,21 @@
         <!-- MENU -->
         <nav id="menu">
             <ul class="nav">
-                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item"><a [routerLink]="['/']" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="#about" class="nav-link">Sobre nosotros</a></li>
                 <li class="nav-item"><a href="#services" class="nav-link">Servicios</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contactanos</a></li>
-                <li class="nav-item">
-                    <button id="btnLogin" (click)="openLogin()" class="btn btn-secondary" *ngIf="!authService.isAuthenticated()">Entrar</button>
-                    <button id="btnUser" (click)="openUser()" class="btn btn-secondary" *ngIf="authService.isAuthenticated()">{{authService.getAuthenticatedUser()?.username}}</button>
+                <li class="nav-item" *ngIf="!authService.isAuthenticated()">
+                    <button id="btnLogin" (click)="openLogin()" class="btn btn-secondary">Entrar</button>
+                </li>
+                <li class="nav-item dropdown" *ngIf="authService.isAuthenticated()">
+                    <button id="btnUser" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                        {{authService.getAuthenticatedUser()?.username}}
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" (click)="openUser()">Perfil</a>
+                        <a class="dropdown-item" (click)="logout()">Cerrar Sesión</a>
+                    </div>
                 </li>
             </ul>
         </nav>
@@ -23,6 +31,8 @@
         <div class="clearfix"></div>
     </div>
 </header>
+
+
 
 <div id="slider" class="slider-big">
     <div>

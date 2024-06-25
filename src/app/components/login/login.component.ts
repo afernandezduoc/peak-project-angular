@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -28,6 +29,13 @@ export class LoginComponent {
       if (user) {
         this.authService.setAuthenticatedUser(user);
         alert('Inicio de sesión exitoso');
+
+        // Redirigir a la página adecuada según el rol del usuario
+        if (user.role === 'admin') {
+          this.router.navigate(['/admin-section']);
+        } else {
+          this.router.navigate(['/private-section']);
+        }
       } else {
         alert('Usuario o contraseña incorrectos');
       }

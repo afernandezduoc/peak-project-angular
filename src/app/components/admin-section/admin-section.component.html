@@ -1,1 +1,31 @@
-<p>admin-section works!</p>
+<div class="container my-5">
+    <h2>Admin Section</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Lista de Usuarios</h3>
+            <ul id="userList" class="list-group">
+                <!-- Usuarios se cargan aquí dinámicamente -->
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3>Editar Usuario</h3>
+            <form id="editUserForm" (ngSubmit)="saveUser()">
+                <div class="form-group">
+                    <label for="editUsername">Usuario</label>
+                    <input type="text" id="editUsername" formControlName="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Correo Electrónico</label>
+                    <input type="email" id="editEmail" formControlName="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editPassword">Contraseña</label>
+                    <input type="password" id="editPassword" formControlName="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" (click)="resetForm()" class="btn btn-secondary ml-2">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    <button (click)="logout()" class="btn btn-danger mt-3">Cerrar Sesión</button>
+</div>

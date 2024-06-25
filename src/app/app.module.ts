@@ -13,6 +13,7 @@ import { ProfileModificationComponent } from './components/profile-modification/
 import { AdminSectionComponent } from './components/admin-section/admin-section.component';
 import { PrivateSectionComponent } from './components/private-section/private-section.component';
 import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component
     ProfileModificationComponent,
     AdminSectionComponent,
     PrivateSectionComponent,
-    PdfViewerComponent
+    PdfViewerComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,29 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor() { }
+  constructor() {
+    this.initializeUsers();
+  }
+
+  private initializeUsers() {
+    if (!localStorage.getItem('users')) {
+      const initialUsers = [
+        {
+          username: 'admin',
+          email: 'admin@example.com',
+          password: '1234',
+          role: 'admin'
+        },
+        {
+          username: 'user',
+          email: 'user@example.com',
+          password: '1234',
+          role: 'user'
+        }
+      ];
+      localStorage.setItem('users', JSON.stringify(initialUsers));
+    }
+  }
 
   private getUsers() {
     return JSON.parse(localStorage.getItem('users') ?? '[]');
@@ -30,7 +52,8 @@ export class AuthService {
   }
 
   getAuthenticatedUser() {
-    return JSON.parse(localStorage.getItem('authenticated') ?? '');
+    const authenticatedUser = localStorage.getItem('authenticated');
+    return authenticatedUser ? JSON.parse(authenticatedUser) : null;
   }
 
   setAuthenticatedUser(user: any) {

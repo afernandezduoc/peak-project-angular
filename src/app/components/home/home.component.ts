@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +8,18 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   openLogin() {
-    // Lógica para abrir el modal de inicio de sesión
+    this.router.navigate(['/login']);
   }
 
   openUser() {
-    // Lógica para abrir el modal de usuario autenticado
+    this.router.navigate(['/profile-modification']);
   }
 
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
 }
