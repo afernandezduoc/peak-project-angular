@@ -28,7 +28,7 @@ export class LoginComponent {
       const user = this.authService.login(this.loginForm.value.username, this.loginForm.value.password);
       if (user) {
         this.authService.setAuthenticatedUser(user);
-        alert('Inicio de sesión exitoso');
+        //alert('Inicio de sesión exitoso');
 
         // Redirigir a la página adecuada según el rol del usuario
         if (user.role === 'admin') {

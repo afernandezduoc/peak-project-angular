@@ -44,7 +44,11 @@ export class AuthService {
 
   login(username: string, password: string) {
     const users = this.getUsers();
-    return users.find((user: any) => user.username === username && user.password === password);
+    const user = users.find((user: any) => user.username === username && user.password === password);
+    if (user) {
+      this.setAuthenticatedUser(user);
+    }
+    return user;
   }
 
   logout() {

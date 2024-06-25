@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-private-section',
@@ -7,14 +7,14 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./private-section.component.css']
 })
 export class PrivateSectionComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private router: Router) {}
 
   viewPdf(pdfUrl: string) {
-    window.open(pdfUrl, '_blank');
+    this.router.navigate(['/pdf-viewer'], { queryParams: { pdfUrl: pdfUrl } });
   }
 
   logout() {
-    this.authService.logout();
-    window.location.href = 'index.html';
+    localStorage.removeItem('authenticated');
+    this.router.navigate(['/']);
   }
 }
