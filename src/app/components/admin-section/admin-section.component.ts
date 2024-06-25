@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
+interface User {
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+}
+
 @Component({
   selector: 'app-admin-section',
   templateUrl: './admin-section.component.html',
@@ -9,7 +16,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AdminSectionComponent implements OnInit {
   editUserForm: FormGroup;
-  users = [];
+  users: User[] = [];
   selectedUserIndex: number | null = null;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
@@ -25,7 +32,7 @@ export class AdminSectionComponent implements OnInit {
   }
 
   loadUsers() {
-    this.users = JSON.parse(localStorage.getItem('users') ?? '') || [];
+    this.users = this.authService.getUsers() as User[];
   }
 
   loadUserForEdit(index: number) {
@@ -36,16 +43,14 @@ export class AdminSectionComponent implements OnInit {
 
   saveUser() {
     if (this.editUserForm.valid && this.selectedUserIndex !== null) {
-      (this.users as any[])[this.selectedUserIndex] = this.editUserForm.value;
-      localStorage.setItem('users', JSON.stringify(this.users));
+      this.authService.updateUser(this.selectedUserIndex, this.editUserForm.value);
       this.loadUsers();
       this.resetForm();
     }
   }
 
   deleteUser(index: number) {
-    this.users.splice(index, 1);
-    localStorage.setItem('users', JSON.stringify(this.users));
+    this.authService.deleteUser(index);
     this.loadUsers();
   }
 

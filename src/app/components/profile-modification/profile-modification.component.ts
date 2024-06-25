@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ProfileModificationComponent {
   profileModificationForm: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.profileModificationForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -36,5 +37,9 @@ export class ProfileModificationComponent {
         alert('Perfil actualizado exitosamente');
       }
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
   }
 }

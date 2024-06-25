@@ -22,13 +22,19 @@ export class AuthService {
           email: 'user@example.com',
           password: '1234',
           role: 'user'
+        },
+        {
+          username: 'user2',
+          email: 'user2@example.com',
+          password: '1234',
+          role: 'user'
         }
       ];
       localStorage.setItem('users', JSON.stringify(initialUsers));
     }
   }
 
-  private getUsers() {
+  public getUsers() {
     return JSON.parse(localStorage.getItem('users') ?? '[]');
   }
 
