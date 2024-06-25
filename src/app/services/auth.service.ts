@@ -8,7 +8,7 @@ export class AuthService {
     this.initializeUsers();
   }
 
-  private initializeUsers() {
+  public initializeUsers() {
     if (!localStorage.getItem('users')) {
       const initialUsers = [
         {
