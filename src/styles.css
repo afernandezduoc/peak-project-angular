@@ -42,7 +42,7 @@ body {
   background: #000000;
   border-top: 5px solid var(--secondary-color);
   border-bottom: 2px solid var(--secondary-color);
-  background-color: #343a40; /* Color de fondo oscuro */
+  /*background-color: #343a40;  Color de fondo oscuro */
   color: white;
   padding: 10px 0;
 }
