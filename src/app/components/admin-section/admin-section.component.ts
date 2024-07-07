@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 interface User {
@@ -19,7 +20,7 @@ export class AdminSectionComponent implements OnInit {
   users: User[] = [];
   selectedUserIndex: number | null = null;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.editUserForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -57,6 +58,10 @@ export class AdminSectionComponent implements OnInit {
   resetForm() {
     this.editUserForm.reset();
     this.selectedUserIndex = null;
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
   }
 
   logout() {

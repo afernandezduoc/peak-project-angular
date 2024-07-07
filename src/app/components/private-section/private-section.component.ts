@@ -17,4 +17,8 @@ export class PrivateSectionComponent {
     localStorage.removeItem('authenticated');
     this.router.navigate(['/']);
   }
+
+  goBack() {
+    this.router.navigate(['/']);
+  }
 }

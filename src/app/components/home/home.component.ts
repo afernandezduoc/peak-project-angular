@@ -18,6 +18,10 @@ export class HomeComponent {
     this.router.navigate(['/profile-modification']);
   }
 
+  openPrivateSection() {
+    this.router.navigate(['/private-section']);
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/']);
