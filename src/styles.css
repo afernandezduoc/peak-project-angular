@@ -34,6 +34,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -moz-osx-font-smoothing: antialiased;
+  background-color: var(--primary-color);
 }
 
 #header {
@@ -43,7 +44,7 @@ body {
   border-top: 5px solid var(--secondary-color);
   border-bottom: 2px solid var(--secondary-color);
   /*background-color: #343a40;  Color de fondo oscuro */
-  color: white;
+  /*color: white;*/
   padding: 10px 0;
 }
 
@@ -95,7 +96,7 @@ body {
   font-weight: bold;
   display: inline-block;
   vertical-align: middle;
-  float: right;
+  /*float: right;*/
 }
 
 #menu ul {
@@ -438,10 +439,10 @@ a:active {
 .contact-form-container {
   max-width: 40.75rem;
   margin: 0 auto;
-  padding: 0.938rem;
+  /*padding: 0.938rem;*/
   border-radius: 5px;
-  box-shadow: 0 3px 10px var(--secondary-shadow);
-  background: white; 
+  box-shadow: 0 5px 15px var(--secondary-shadow);
+  background: var(--tertiary-color); 
 }
 
 .contact-form-container label {
@@ -452,7 +453,7 @@ a:active {
 
 .contact-form-container textarea {
   min-height: 6.25rem;
-  font-size: 14px;
+  /*font-size: 14px;*/
 }
 
 .contact-form-container .input-field {

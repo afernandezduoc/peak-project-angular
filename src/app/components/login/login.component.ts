@@ -21,6 +21,10 @@ export class LoginComponent {
 
   get f() { return this.loginForm.controls; }
 
+  goBack() {
+    this.router.navigate(['/']);
+  }
+
   onSubmit() {
     this.submitted = true;
 
