@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
-interface User {
-  username: string;
-  email: string;
-  password: string;
-  role: string;
-}
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-admin-section',
@@ -18,9 +11,9 @@ interface User {
 export class AdminSectionComponent implements OnInit {
   editUserForm: FormGroup;
   users: User[] = [];
-  selectedUserIndex: number | null = null;
+  selectedUserIndex: string | null = null;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.editUserForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -33,26 +26,32 @@ export class AdminSectionComponent implements OnInit {
   }
 
   loadUsers() {
-    this.users = this.authService.getUsers() as User[];
+    this.authService.getUsers().subscribe(users => {
+      this.users = users;
+    });
   }
 
-  loadUserForEdit(index: number) {
-    this.selectedUserIndex = index;
-    const user = this.users[index];
-    this.editUserForm.patchValue(user);
+  loadUserForEdit(key: string) {
+    this.selectedUserIndex = key;
+    const user = this.users.find(user => user.key === key);
+    if (user) {
+      this.editUserForm.patchValue(user);
+    }
   }
 
   saveUser() {
     if (this.editUserForm.valid && this.selectedUserIndex !== null) {
-      this.authService.updateUser(this.selectedUserIndex, this.editUserForm.value);
-      this.loadUsers();
-      this.resetForm();
+      this.authService.updateUser(this.selectedUserIndex, this.editUserForm.value).then(() => {
+        this.loadUsers();
+        this.resetForm();
+      });
     }
   }
 
-  deleteUser(index: number) {
-    this.authService.deleteUser(index);
-    this.loadUsers();
+  deleteUser(key: string) {
+    this.authService.deleteUser(key).then(() => {
+      this.loadUsers();
+    });
   }
 
   resetForm() {
@@ -61,7 +60,7 @@ export class AdminSectionComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/']);
+    window.history.back();
   }
 
   logout() {

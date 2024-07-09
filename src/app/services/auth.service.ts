@@ -1,60 +1,50 @@
 import { Injectable } from '@angular/core';
+import { FirebaseService } from './firebase.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor() {
+  private basePath = '/users';
+
+  constructor(private firebaseService: FirebaseService) {
     this.initializeUsers();
   }
 
-  public initializeUsers() {
-    if (!localStorage.getItem('users')) {
-      const initialUsers = [
-        {
-          username: 'admin',
-          email: 'admin@example.com',
-          password: '1234',
-          role: 'admin'
-        },
-        {
-          username: 'user',
-          email: 'user@example.com',
-          password: '1234',
-          role: 'user'
-        },
-        {
-          username: 'user2',
-          email: 'user2@example.com',
-          password: '1234',
-          role: 'user'
-        }
-      ];
-      localStorage.setItem('users', JSON.stringify(initialUsers));
-    }
+  private initializeUsers() {
+    this.getUsers().subscribe(users => {
+      if (users.length === 0) {
+        const initialUsers = [
+          { username: 'admin', email: 'admin@example.com', password: '1234', role: 'admin' },
+          { username: 'user', email: 'user@example.com', password: '1234', role: 'user' }
+        ];
+        initialUsers.forEach(user => this.createUser(user));
+      }
+    });
   }
 
-  public getUsers() {
-    return JSON.parse(localStorage.getItem('users') ?? '[]');
+  getUsers(): Observable<any[]> {
+    return this.firebaseService.getUsers();
   }
 
-  private setUsers(users: string[]) {
-    localStorage.setItem('users', JSON.stringify(users));
+  createUser(user: any): Promise<void> {
+    return this.firebaseService.createUser(user);
   }
 
-  register(user: any) {
-    const users = this.getUsers();
-    users.push(user);
-    this.setUsers(users);
+  updateUser(key: string, value: any): Promise<void> {
+    return this.firebaseService.updateUser(key, value);
   }
 
-  login(username: string, password: string) {
-    const users = this.getUsers();
-    const user = users.find((user: any) => user.username === username && user.password === password);
-    if (user) {
-      this.setAuthenticatedUser(user);
-    }
-    return user;
+  deleteUser(key: string): Promise<void> {
+    return this.firebaseService.deleteUser(key);
+  }
+
+  login(username: string, password: string): Observable<any> {
+    return this.getUsers().pipe(
+      map(users => users.find(user => user.username === username && user.password === password))
+    );
   }
 
   logout() {
@@ -72,17 +62,5 @@ export class AuthService {
 
   isAuthenticated() {
     return !!this.getAuthenticatedUser();
-  }
-
-  updateUser(index: number, updatedUser: any) {
-    const users = this.getUsers();
-    users[index] = updatedUser;
-    this.setUsers(users);
-  }
-
-  deleteUser(index: number) {
-    const users = this.getUsers();
-    users.splice(index, 1);
-    this.setUsers(users);
   }
 }

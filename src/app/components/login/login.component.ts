@@ -10,9 +10,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  errorMessage: string | null = null;
   submitted = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -25,24 +30,21 @@ export class LoginComponent {
     this.router.navigate(['/']);
   }
 
-  onSubmit() {
-    this.submitted = true;
-
-    if (this.loginForm.valid) {
-      const user = this.authService.login(this.loginForm.value.username, this.loginForm.value.password);
-      if (user) {
-        this.authService.setAuthenticatedUser(user);
-        //alert('Inicio de sesión exitoso');
-
-        // Redirigir a la página adecuada según el rol del usuario
-        if (user.role === 'admin') {
-          this.router.navigate(['/admin-section']);
+  login() {
+    const { username, password } = this.loginForm.value;
+    this.authService.login(username, password).subscribe(
+      user => {
+        if (user) {
+          this.authService.setAuthenticatedUser(user);
+          this.router.navigate(['/']);
         } else {
-          this.router.navigate(['/private-section']);
+          this.errorMessage = 'Usuario o contraseña incorrectos';
         }
-      } else {
-        alert('Usuario o contraseña incorrectos');
+      },
+      error => {
+        this.errorMessage = 'Ha ocurrido un error. Por favor, inténtelo de nuevo.';
+        console.error('Error during login', error);
       }
-    }
+    );
   }
 }
